@@ -7,8 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		5E71A25D210FA05B00583203 /* TasksListTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E71A25C210FA05B00583203 /* TasksListTableViewController.swift */; };
+		5E71A25F210FA09B00583203 /* Task.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E71A25E210FA09B00583203 /* Task.swift */; };
 		5ED207C92109CA490092E90D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5ED207C82109CA490092E90D /* AppDelegate.swift */; };
-		5ED207CB2109CA490092E90D /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5ED207CA2109CA490092E90D /* ViewController.swift */; };
 		5ED207CE2109CA490092E90D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5ED207CC2109CA490092E90D /* Main.storyboard */; };
 		5ED207D02109CA4E0092E90D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5ED207CF2109CA4E0092E90D /* Assets.xcassets */; };
 		5ED207D32109CA4E0092E90D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5ED207D12109CA4E0092E90D /* LaunchScreen.storyboard */; };
@@ -26,9 +27,10 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		5E71A25C210FA05B00583203 /* TasksListTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TasksListTableViewController.swift; sourceTree = "<group>"; };
+		5E71A25E210FA09B00583203 /* Task.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Task.swift; sourceTree = "<group>"; };
 		5ED207C52109CA490092E90D /* TODO MVP.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "TODO MVP.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		5ED207C82109CA490092E90D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		5ED207CA2109CA490092E90D /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		5ED207CD2109CA490092E90D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		5ED207CF2109CA4E0092E90D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		5ED207D22109CA4E0092E90D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -78,11 +80,12 @@
 			isa = PBXGroup;
 			children = (
 				5ED207C82109CA490092E90D /* AppDelegate.swift */,
-				5ED207CA2109CA490092E90D /* ViewController.swift */,
 				5ED207CC2109CA490092E90D /* Main.storyboard */,
 				5ED207CF2109CA4E0092E90D /* Assets.xcassets */,
 				5ED207D12109CA4E0092E90D /* LaunchScreen.storyboard */,
 				5ED207D42109CA4E0092E90D /* Info.plist */,
+				5E71A25C210FA05B00583203 /* TasksListTableViewController.swift */,
+				5E71A25E210FA09B00583203 /* Task.swift */,
 			);
 			path = "TODO MVP";
 			sourceTree = "<group>";
@@ -197,7 +200,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				5ED207CB2109CA490092E90D /* ViewController.swift in Sources */,
+				5E71A25D210FA05B00583203 /* TasksListTableViewController.swift in Sources */,
+				5E71A25F210FA09B00583203 /* Task.swift in Sources */,
 				5ED207C92109CA490092E90D /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -367,7 +371,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "com.daitensai.TODO-MVP";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -384,7 +388,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "com.daitensai.TODO-MVP";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};
