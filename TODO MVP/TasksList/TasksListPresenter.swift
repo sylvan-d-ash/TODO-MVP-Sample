@@ -8,7 +8,7 @@
 
 import Foundation
 
-protocol TasksListDelegate: NSObjectProtocol {
+protocol TasksListDelegate: class {
     func showProgress()
     func hideProgress()
     func setTasks(_ tasks: [Task])
@@ -32,10 +32,16 @@ class TasksListPresenter {
         // display loading indicator
         delegate?.showProgress()
         
-        service.getTasks { [weak self] tasks in
+        service.getTasks { [weak self] tasks, error in
             
             // hide loading indicator
             self?.delegate?.hideProgress()
+            
+            // error
+            guard error == nil else {
+                self?.delegate?.showError(error: error!)
+                return
+            }
             
             if tasks.count == 0 {
                 self?.delegate?.setEmptyTasks()

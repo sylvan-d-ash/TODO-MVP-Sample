@@ -22,7 +22,7 @@ import Foundation
 
 class TaskService {
     
-    func getTasks(completion: @escaping ([Task]) -> Void) {
+    func getTasks(completion: @escaping ([Task], Error?) -> Void) {
         
         var tasks: [Task] = []
         tasks.append(Task(title: "Make TODO MVP app"))
@@ -31,7 +31,7 @@ class TaskService {
         
         let delayTime = DispatchTime.now() + Double(Int64(2 * Double(NSEC_PER_SEC))) / Double(NSEC_PER_SEC)
         DispatchQueue.main.asyncAfter(deadline: delayTime) {
-            completion(tasks)
+            completion(tasks, nil)
         }
     }
     
