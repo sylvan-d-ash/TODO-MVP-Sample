@@ -30,10 +30,15 @@ class TasksListPresenterSpec: QuickSpec {
         var tasks: [Task] = []
         var wasEmptyTasksReturned = false
         var wasErrorReturned = false
+        var wasProgressShown = false
+        var wasProgressHidden = false
         
-        func showProgress() {}
-        func hideProgress() {}
-        
+        func showProgress() {
+            wasProgressShown = true
+        }
+        func hideProgress() {
+            wasProgressHidden = true
+        }
         func setTasks(_ tasks: [Task]) {
             self.tasks = tasks
         }
@@ -55,28 +60,30 @@ class TasksListPresenterSpec: QuickSpec {
                     // given
                     let tasksViewMock = TasksListViewMock()
                     let tasksServiceFake = FakeTasksService([Task(title: "First"), Task(title: "Second")])
-                    sut = TasksListPresenter(service: tasksServiceFake)
-                    sut.setDelegate(tasksViewMock)
+                    sut = TasksListPresenter(view: tasksViewMock, service: tasksServiceFake)
                     
                     // when
                     sut.fetchTasks()
                     
                     // then
                     expect(tasksViewMock.tasks.count).to(equal(2))
+                    expect(tasksViewMock.wasProgressShown).to(equal(true))
+                    expect(tasksViewMock.wasProgressHidden).to(equal(true))
                 }
                 
                 it("should return an error") {
                     // given
                     let tasksViewMock = TasksListViewMock()
                     let taskServiceFake = FakeTasksService([], error: NetworkError.IncorrectDataReturned)
-                    sut = TasksListPresenter(service: taskServiceFake)
-                    sut.setDelegate(tasksViewMock)
+                    sut = TasksListPresenter(view: tasksViewMock, service: taskServiceFake)
                     
                     // when
                     sut.fetchTasks()
                     
                     // then
                     expect(tasksViewMock.wasErrorReturned).to(equal(true))
+                    expect(tasksViewMock.wasProgressShown).to(equal(true))
+                    expect(tasksViewMock.wasProgressHidden).to(equal(true))
                 }
             }
             

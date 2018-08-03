@@ -8,14 +8,19 @@
 
 import UIKit
 
-class TasksListViewController: UIViewController {
+class TasksListView: UIViewController {
     
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView?
     @IBOutlet weak var emptyView: UIView?
     
     fileprivate var tasks = [Task]()
-    fileprivate var presenter = TasksListPresenter(service: TaskService())
+    internal var presenter: TasksListPresenter?
+    
+    required init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+        presenter = TasksListPresenter(view: self)
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -23,14 +28,18 @@ class TasksListViewController: UIViewController {
         // title
         title = NSLocalizedString("Title_TasksList", comment: "Scene title")
         
-        presenter.setDelegate(self)
-        presenter.fetchTasks()
+        //presenter = TasksListPresenter(view: self)
+        presenter?.fetchTasks()
     }
 
+    @IBAction func buttonAddTaskDidTap(_ sender: Any) {
+        
+    }
+    
 }
 
 
-extension TasksListViewController: UITableViewDataSource {
+extension TasksListView: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return tasks.count
@@ -48,10 +57,11 @@ extension TasksListViewController: UITableViewDataSource {
     }
     
     // enable editing
+    
 }
 
 
-extension TasksListViewController: TasksListDelegate {
+extension TasksListView: TasksListDelegate {
     
     func showProgress() {
         activityIndicator?.startAnimating()

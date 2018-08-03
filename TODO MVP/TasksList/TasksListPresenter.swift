@@ -17,10 +17,11 @@ protocol TasksListDelegate: class {
 }
 
 class TasksListPresenter {
-    weak fileprivate var delegate: TasksListDelegate?
+    weak internal var delegate: TasksListDelegate?
     fileprivate let service: TaskService
     
-    init(service: TaskService) {
+    init(view: TasksListDelegate, service: TaskService = TaskService()) {
+        self.delegate = view
         self.service = service
     }
 

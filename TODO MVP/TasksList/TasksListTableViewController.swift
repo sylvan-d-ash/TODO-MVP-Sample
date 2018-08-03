@@ -18,7 +18,13 @@ class TasksListTableViewController: UITableViewController {
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView?
     
     fileprivate var tasks: [Task] = []
-    fileprivate var presenter: TasksListPresenter = TasksListPresenter(service: TaskService())
+    internal var presenter: TasksListPresenter?
+    
+    required init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+        presenter = TasksListPresenter(view: self)
+        print("==== REQUIRED INIT ====")
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -28,8 +34,9 @@ class TasksListTableViewController: UITableViewController {
         
         activityIndicator?.hidesWhenStopped = true
         
-        presenter.setDelegate(self)
-        presenter.fetchTasks()
+        //presenter = TasksListPresenter(view: self)
+        presenter?.fetchTasks()
+        print("==== view did load ====")
     }
     
 
