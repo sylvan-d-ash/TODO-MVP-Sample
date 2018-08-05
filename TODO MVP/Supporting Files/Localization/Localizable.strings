@@ -1,0 +1,10 @@
+/* 
+  Localizable.strings
+  TODO MVP
+
+  Created by Sylvan Ash on 05/08/2018.
+  Copyright © 2018 Sylvan Ash. All rights reserved.
+*/
+
+// titles
+"Title_TasksList" = "Tasks TODO";
