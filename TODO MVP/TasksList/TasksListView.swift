@@ -20,20 +20,26 @@ class TasksListView: UIViewController {
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
         presenter = TasksListPresenter(view: self)
+        print("==== REQUIRED INIT ====")
     }
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        print("==== view did load ====")
         
         // title
         title = NSLocalizedString("Title_TasksList", comment: "Scene title")
+        
+        activityIndicator?.hidesWhenStopped = true
+        tableView.dataSource = self
+        tableView.isHidden = true
+        emptyView?.isHidden = true
         
         //presenter = TasksListPresenter(view: self)
         presenter?.fetchTasks()
     }
 
     @IBAction func buttonAddTaskDidTap(_ sender: Any) {
-        
     }
     
 }
@@ -48,7 +54,7 @@ extension TasksListView: UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         let task = tasks[indexPath.row]
-        let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath) as! TaskCellView
+        let cell = tableView.dequeueReusableCell(withIdentifier: "TaskCell", for: indexPath) as! TaskCellView
         
         cell.titleLabel.text = task.title
         cell.isCompletedImageView.image = task.isCompleted ? #imageLiteral(resourceName: "Icons/Checked Circle") : #imageLiteral(resourceName: "Icons/Circle")
@@ -73,6 +79,7 @@ extension TasksListView: TasksListDelegate {
     
     func setTasks(_ tasks: [Task]) {
         self.tasks = tasks
+        tableView.isHidden = false
         tableView.reloadData()
     }
     
