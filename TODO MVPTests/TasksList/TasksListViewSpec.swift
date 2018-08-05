@@ -40,12 +40,12 @@ class TasksListViewSpec: QuickSpec {
     }
     
     private var presenter: FakeTasksListPresenter!
-    var sut: TasksListTableViewController!
+    var sut: TasksListView!
     
     override func spec() {
         describe("TasksListView") {
             beforeEach {
-                self.sut = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "TasksListSID") as! TasksListTableViewController
+                self.sut = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "TasksListSID") as! TasksListView
                 self.presenter = FakeTasksListPresenter(view: self.sut)
                 
                 self.sut.presenter = self.presenter
@@ -54,7 +54,7 @@ class TasksListViewSpec: QuickSpec {
             
             describe("fetching tasks") {
                 context("when fetching tasks") {
-                    it("should show activity indicator when fetching") {
+                    it("should show activity indicator") {
                         // given
                         self.presenter.isLoading = true
 
@@ -65,14 +65,16 @@ class TasksListViewSpec: QuickSpec {
                         expect(self.sut.activityIndicator).toNot(beNil())
                         expect(self.sut.activityIndicator?.isAnimating).to(equal(true))
                     }
+                }
 
-                    it("should hide activity indicator when fetching is complete") {
+                context("when tasks have been fetched") {
+                    it("should hide activity indicator") {
                         // given
                         self.presenter.isLoading = true
-
+                        
                         // when
                         self.presenter.fetchTasks()
-
+                        
                         // then
                         expect(self.sut.activityIndicator).toNot(beNil())
                         expect(self.sut.activityIndicator?.isAnimating).to(equal(true))
@@ -85,9 +87,7 @@ class TasksListViewSpec: QuickSpec {
                         // then
                         expect(self.sut.activityIndicator?.isAnimating).to(equal(false))
                     }
-                }
-
-                context("when tasks have been fetched") {
+                    
                     it("should have 2 tasks loaded") {
                         // given
                         self.presenter.isComplete = true
@@ -97,13 +97,32 @@ class TasksListViewSpec: QuickSpec {
                         self.presenter.fetchTasks()
 
                         // then
-                        // validate that numberOfRows in section is equal to 2
-                        fail()
+                        expect(self.sut.tableView.numberOfRows(inSection: 0)).to(equal(2))
+                        
+                        expect(self.sut.tableView.isHidden).to(equal(false))
+                        expect(self.sut.emptyView?.isHidden).to(equal(true))
                     }
                     it("should show the NO TASKS view") {
-                        fail()
+                        // given
+                        self.presenter.isComplete = true
+                        
+                        // when
+                        self.presenter.fetchTasks()
+                        
+                        // then
+                        expect(self.sut.emptyView?.isHidden).to(equal(false))
+                        expect(self.sut.tableView.isHidden).to(equal(true))
                     }
                     it("should show an error alert message") {
+                        // given
+                        self.presenter.isComplete = true
+                        self.presenter.error = NetworkError.IncorrectDataReturned
+                        
+                        // when
+                        self.presenter.fetchTasks()
+                        
+                        // then
+                        // validate that an error alert is shown
                         fail()
                     }
                 }
@@ -114,7 +133,7 @@ class TasksListViewSpec: QuickSpec {
                     it("should show unchecked icon and task title") {
                         fail()
                     }
-                    it("should show checked icon and taks title") {
+                    it("should show checked icon and task title") {
                         fail()
                     }
                 }
