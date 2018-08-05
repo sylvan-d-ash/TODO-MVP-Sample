@@ -130,11 +130,35 @@ class TasksListViewSpec: QuickSpec {
 
             describe("showing tasks") {
                 context("table view cell") {
+                    var cell: TaskCellView!
+                    
                     it("should show unchecked icon and task title") {
-                        fail()
+                        // given
+                        let title = "First"
+                        self.presenter.isComplete = true
+                        self.presenter.tasks = [Task(title: title), Task(title: "Second")]
+                        
+                        // when
+                        self.presenter.fetchTasks()
+                        cell = self.sut.tableView.cellForRow(at: IndexPath(row: 0, section: 0)) as! TaskCellView
+                        
+                        // then
+                        expect(cell.titleLabel.text).to(equal(title))
+                        expect(cell.isCompletedImageView.image).to(equal(#imageLiteral(resourceName: "Icons/Circle")))
                     }
                     it("should show checked icon and task title") {
-                        fail()
+                        // given
+                        let title = "First cell"
+                        self.presenter.isComplete = true
+                        self.presenter.tasks = [Task(title: title, isCompleted: true), Task(title: "Second")]
+                        
+                        // when
+                        self.presenter.fetchTasks()
+                        cell = self.sut.tableView.cellForRow(at: IndexPath(row: 0, section: 0)) as! TaskCellView
+                        
+                        // then
+                        expect(cell.titleLabel.text).to(equal(title))
+                        expect(cell.isCompletedImageView.image).to(equal(#imageLiteral(resourceName: "Icons/Checked Circle")))
                     }
                 }
             }
