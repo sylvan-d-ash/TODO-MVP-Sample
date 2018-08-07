@@ -94,6 +94,10 @@ extension TasksListView: TasksListDelegate {
         tableView.isHidden = true
         
         // show error
+        let alert = UIAlertController(title: "Error occurred", message: "\(error.localizedDescription)", preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "OK", style: .cancel, handler: nil))
+        
+        present(alert, animated: true, completion: nil)
     }
     
 }

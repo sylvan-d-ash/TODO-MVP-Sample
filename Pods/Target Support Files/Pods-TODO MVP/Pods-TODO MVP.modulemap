@@ -1,0 +1,6 @@
+framework module Pods_TODO_MVP {
+  umbrella header "Pods-TODO MVP-umbrella.h"
+
+  export *
+  module * { export * }
+}
